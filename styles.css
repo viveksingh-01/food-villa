@@ -12,3 +12,8 @@
 .nav-items > ul > li {
   padding: 4px 8px;
 }
+
+.login-btn-container {
+  padding: 4px;
+  margin: 8px;
+}
