@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { RESTAURANTS_API_URL } from '../constants';
 import RestaurantCard from './RestaurantCard';
 
 const Body = () => {
@@ -9,11 +10,15 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const res = await fetch(
-      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING'
-    );
-    const json = await res.json();
-    setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    try {
+      const res = await fetch(RESTAURANTS_API_URL);
+      const json = await res.json();
+      if (json) {
+        setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      }
+    } catch (e) {
+      console.log('error', e);
+    }
   }
 
   return (
