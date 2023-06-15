@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RESTAURANTS_API_URL } from '../constants';
 import RestaurantCard from './RestaurantCard';
+import RestaurantsListShimmer from './RestaurantsListShimmer';
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -23,11 +24,15 @@ const Body = () => {
 
   return (
     <>
-      <div className="restaurant-list">
-        {restaurants.map(restaurant => {
-          return <RestaurantCard {...restaurant.data} key={restaurant.data.id} />;
-        })}
-      </div>
+      {restaurants?.length == 0 ? (
+        <RestaurantsListShimmer />
+      ) : (
+        <div className="restaurant-list">
+          {restaurants.map(restaurant => {
+            return <RestaurantCard {...restaurant.data} key={restaurant.data.id} />;
+          })}
+        </div>
+      )}
     </>
   );
 };
