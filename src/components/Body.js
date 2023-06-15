@@ -15,7 +15,8 @@ const Body = () => {
       const res = await fetch(RESTAURANTS_API_URL);
       const json = await res.json();
       if (json) {
-        setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+        const restaurants = json.data?.cards?.find(item => item.cardType === 'seeAllRestaurants');
+        setRestaurants(restaurants?.data?.data?.cards);
       }
     } catch (e) {
       console.log('error', e);
