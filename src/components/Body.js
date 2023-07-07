@@ -4,7 +4,9 @@ import RestaurantCard from './RestaurantCard';
 import RestaurantsListShimmer from './RestaurantsListShimmer';
 
 const Body = () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     getRestaurants();
@@ -16,20 +18,38 @@ const Body = () => {
       const json = await res.json();
       if (json) {
         const restaurants = json.data?.cards?.find(item => item.cardType === 'seeAllRestaurants');
-        setRestaurants(restaurants?.data?.data?.cards);
+        setAllRestaurants(restaurants?.data?.data?.cards);
+        setFilteredRestaurants(restaurants?.data?.data?.cards);
       }
     } catch (e) {
       console.log('error', e);
     }
   }
 
+  const handleSearch = () => {
+    const searchResult = allRestaurants.filter(item =>
+      item.data.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setFilteredRestaurants(searchResult);
+  };
+
   return (
     <>
-      {restaurants?.length == 0 ? (
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search"
+          value={searchInput}
+          onChange={e => setSearchInput(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      {filteredRestaurants?.length == 0 ? (
         <RestaurantsListShimmer />
       ) : (
         <div className="restaurant-list">
-          {restaurants.map(restaurant => {
+          {filteredRestaurants.map(restaurant => {
             return <RestaurantCard {...restaurant.data} key={restaurant.data.id} />;
           })}
         </div>
