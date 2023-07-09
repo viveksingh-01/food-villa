@@ -7,12 +7,14 @@ const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getRestaurants();
   }, []);
 
   async function getRestaurants() {
+    setIsLoading(true);
     try {
       const res = await fetch(RESTAURANTS_API_URL);
       const json = await res.json();
@@ -20,9 +22,11 @@ const Body = () => {
         const restaurants = json.data?.cards?.find(item => item.cardType === 'seeAllRestaurants');
         setAllRestaurants(restaurants?.data?.data?.cards);
         setFilteredRestaurants(restaurants?.data?.data?.cards);
+        setIsLoading(false);
       }
     } catch (e) {
       console.log('error', e);
+      setIsLoading(false);
     }
   }
 
@@ -45,8 +49,10 @@ const Body = () => {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      {filteredRestaurants?.length == 0 ? (
+      {isLoading ? (
         <RestaurantsListShimmer />
+      ) : filteredRestaurants?.length == 0 ? (
+        <h4>No restaurants found.</h4>
       ) : (
         <div className="restaurant-list">
           {filteredRestaurants.map(restaurant => {
