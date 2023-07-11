@@ -3,7 +3,7 @@ import { RESTAURANTS_API_URL } from '../constants';
 import RestaurantCard from './RestaurantCard';
 import RestaurantsListShimmer from './RestaurantsListShimmer';
 
-const Body = () => {
+const Home = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState('');
@@ -51,7 +51,7 @@ const Body = () => {
       </div>
       {isLoading ? (
         <RestaurantsListShimmer />
-      ) : filteredRestaurants?.length == 0 ? (
+      ) : allRestaurants?.length == 0 ? null : filteredRestaurants?.length == 0 ? (
         <h4>No restaurants found.</h4>
       ) : (
         <div className="restaurant-list">
@@ -64,4 +64,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default Home;
