@@ -1,28 +1,34 @@
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 import Header from './components/Header';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
 
-const appRouter = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-    errorElement: <NotFound />
-  },
-  {
-    path: '/about',
-    element: <AboutUs />
-  }
-]);
-
 const App = () => (
   <>
     <Header />
-    <RouterProvider router={appRouter} />
+    <Outlet />
   </>
 );
 
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/about',
+        element: <AboutUs />
+      }
+    ]
+  }
+]);
+
 const root = createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<RouterProvider router={appRouter} />);
