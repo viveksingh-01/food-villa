@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
+import Contact from './components/Contact';
 import Header from './components/Header';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
@@ -25,6 +26,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/about',
         element: <AboutUs />
+      },
+      {
+        path: '/contact',
+        element: <Contact />
       }
     ]
   }
