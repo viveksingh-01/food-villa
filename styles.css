@@ -1,3 +1,7 @@
+.container {
+  margin: 12px;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
