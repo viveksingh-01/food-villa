@@ -20,7 +20,8 @@ const Home = () => {
       const res = await fetch(RESTAURANTS_API_URL);
       const json = await res.json();
       if (json) {
-        const restaurants = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        const restaurantsListing = json.data?.cards?.find(item => item.card?.card?.id === 'restaurant_grid_listing');
+        const restaurants = restaurantsListing?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setAllRestaurants(restaurants);
         setFilteredRestaurants(restaurants);
         setIsLoading(false);
