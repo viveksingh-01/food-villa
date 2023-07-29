@@ -20,9 +20,9 @@ const Home = () => {
       const res = await fetch(RESTAURANTS_API_URL);
       const json = await res.json();
       if (json) {
-        const restaurants = json.data?.cards?.find(item => item.cardType === 'seeAllRestaurants');
-        setAllRestaurants(restaurants?.data?.data?.cards);
-        setFilteredRestaurants(restaurants?.data?.data?.cards);
+        const restaurants = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        setAllRestaurants(restaurants);
+        setFilteredRestaurants(restaurants);
         setIsLoading(false);
       }
     } catch (e) {
@@ -58,8 +58,8 @@ const Home = () => {
         <div className="restaurant-list">
           {filteredRestaurants.map(restaurant => {
             return (
-              <Link to={`/restaurant/${restaurant.data.id}`} key={restaurant.data.id}>
-                <RestaurantCard {...restaurant.data} />
+              <Link to={`/restaurant/${restaurant.info.id}`} key={restaurant.info.id}>
+                <RestaurantCard {...restaurant.info} />
               </Link>
             );
           })}
