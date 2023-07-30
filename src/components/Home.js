@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RESTAURANTS_API_URL } from '../constants';
+import useOnlineStatus from '../utils/hooks/useOnlineStatus';
 import RestaurantCard from './RestaurantCard';
 import RestaurantsListShimmer from './RestaurantsListShimmer';
 
@@ -9,6 +10,8 @@ const Home = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const isOnline = useOnlineStatus();
 
   useEffect(() => {
     getRestaurants();
@@ -38,6 +41,10 @@ const Home = () => {
     );
     setFilteredRestaurants(searchResult);
   };
+
+  if (!isOnline) {
+    return <h4>You're offline, please check your internet connection.</h4>;
+  }
 
   return (
     <>
