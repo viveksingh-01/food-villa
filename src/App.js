@@ -11,10 +11,10 @@ import Restaurant from './components/Restaurant';
 const Instamart = lazy(() => import('./components/Instamart'));
 
 const App = () => (
-  <>
+  <div className="bg-gray-50">
     <Header />
     <Outlet />
-  </>
+  </div>
 );
 
 const appRouter = createBrowserRouter([
