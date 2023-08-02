@@ -6,7 +6,7 @@ const Title = () => <h2 className="mx-5 p-3 text-lg font-medium">Food Villa</h2>
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div className="flex justify-between m-3 p-2 px-3 rounded-md bg-gray-100">
+    <div className="flex justify-between m-3 p-2 px-3 rounded-md bg-gray-100 bg-gradient-to-b from-white to-gray-100">
       <Title />
       <div className="">
         <ul className="flex space-x-2">
