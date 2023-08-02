@@ -47,33 +47,39 @@ const Home = () => {
   }
 
   return (
-    <>
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search"
-          value={searchInput}
-          onChange={e => setSearchInput(e.target.value)}
-        />
-        <button onClick={handleSearch}>Search</button>
+    <section className="mx-12">
+      <div className="my-8 flex justify-center">
+        <div className="flex">
+          <input
+            type="text"
+            className="p-2 mx-auto border-2 border-r-0 border-gray-300 rounded-l-md w-80"
+            placeholder="Type restaurant's name"
+            value={searchInput}
+            onChange={e => setSearchInput(e.target.value)}
+          />
+          <button
+            className="p-2 px-3 border-2 border-gray-300 rounded-r-md hover:bg-gray-700 hover:text-gray-300 hover:border-gray-700"
+            onClick={handleSearch}>
+            Search
+          </button>
+        </div>
       </div>
       {isLoading ? (
         <RestaurantsListShimmer />
       ) : allRestaurants?.length == 0 ? null : filteredRestaurants?.length == 0 ? (
         <h4>No restaurants found.</h4>
       ) : (
-        <div className="restaurant-list">
+        <div className="flex flex-wrap justify-evenly">
           {filteredRestaurants.map(restaurant => {
             return (
-              <Link to={`/restaurant/${restaurant.info.id}`} key={restaurant.info.id}>
+              <Link to={`/restaurant/${restaurant.info.id}`} key={restaurant.info.id} className="m-4 mb-12">
                 <RestaurantCard {...restaurant.info} />
               </Link>
             );
           })}
         </div>
       )}
-    </>
+    </section>
   );
 };
 
