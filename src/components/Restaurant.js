@@ -15,24 +15,28 @@ export default function Restaurant() {
   const { itemCards } = cardWithMenu?.card?.card;
 
   return (
-    <div className="menu">
-      <h1>{name}</h1>
+    <div className="m-4 mx-12 p-2">
+      <h1 className="font-bold text-xl">{name}</h1>
       <p>
         {cuisines.join(', ')} - {costForTwoMessage}
       </p>
-      <h2>Menu</h2>
-      <ul>
-        {!itemCards || itemCards.length === 0 ? (
-          <p>Sorry, the menu is not available at the moment.</p>
-        ) : (
-          itemCards.map(item => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} -{' Rs.'}
-              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-            </li>
-          ))
-        )}
-      </ul>
+      <div className="my-6 w-100">
+        <h2 className="font-semibold text-lg mb-3">Menu</h2>
+        <ul className="flex flex-wrap">
+          {!itemCards || itemCards.length === 0 ? (
+            <p>Sorry, the menu is not available at the moment.</p>
+          ) : (
+            itemCards.map(item => (
+              <li
+                key={item.card.info.id}
+                className="w-[500px] p-2 px-3 mb-1 mr-8 bg-gray-100 rounded-md flex justify-between">
+                <span>{item.card.info.name}</span>{' '}
+                <span>Rs. {item.card.info.price / 100 || item.card.info.defaultPrice / 100}</span>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
