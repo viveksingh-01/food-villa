@@ -37,7 +37,7 @@ const Home = () => {
 
   const handleSearch = () => {
     const searchResult = allRestaurants.filter(item =>
-      item.data.name.toLowerCase().includes(searchInput.toLowerCase())
+      item.info?.name?.toLowerCase().includes(searchInput.toLowerCase())
     );
     setFilteredRestaurants(searchResult);
   };
