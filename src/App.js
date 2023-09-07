@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
@@ -14,6 +15,7 @@ const App = () => (
   <div className="bg-gray-50">
     <Header />
     <Outlet />
+    <Footer />
   </div>
 );
 
