@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
@@ -8,14 +9,17 @@ import Header from './components/Header';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Restaurant from './components/Restaurant';
+import store from './utils/store';
 
 const Instamart = lazy(() => import('./components/Instamart'));
 
 const App = () => (
   <div className="bg-gray-50">
-    <Header />
-    <Outlet />
-    <Footer />
+    <Provider store={store}>
+      <Header />
+      <Outlet />
+      <Footer />
+    </Provider>
   </div>
 );
 
