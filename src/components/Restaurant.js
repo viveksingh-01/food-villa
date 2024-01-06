@@ -37,8 +37,8 @@ export default function Restaurant() {
                   </span>
                 </div>
                 <div>
-                  <button className="p-2 px-4 text-sm border-2 border-green-500 rounded-md bg-green-500 text-white hover:bg-green-600 hover:border-green-600">
-                    Add
+                  <button className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200">
+                    ADD
                   </button>
                 </div>
               </li>
