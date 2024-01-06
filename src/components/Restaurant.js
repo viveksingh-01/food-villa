@@ -1,8 +1,11 @@
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { addItem } from '../utils/cartSlice';
 import useRestaurantInfo from '../utils/hooks/useRestaurantInfo';
 
 export default function Restaurant() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const restaurantInfo = useRestaurantInfo(id);
 
   if (!restaurantInfo) return null;
@@ -13,6 +16,10 @@ export default function Restaurant() {
     item?.card?.card?.hasOwnProperty('itemCards')
   );
   const { itemCards } = cardWithMenu?.card?.card;
+
+  const handleAddItem = item => {
+    dispatch(addItem(item));
+  };
 
   return (
     <div className="m-4 mx-12 p-2">
@@ -37,7 +44,9 @@ export default function Restaurant() {
                   </span>
                 </div>
                 <div>
-                  <button className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200">
+                  <button
+                    className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200"
+                    onClick={() => handleAddItem(item)}>
                     ADD
                   </button>
                 </div>
