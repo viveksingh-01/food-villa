@@ -13,7 +13,7 @@ const Header = () => {
     <div className="flex justify-between m-3 p-2 px-3 rounded-md bg-gray-100 bg-gradient-to-b from-white to-gray-100">
       <Title />
       <div className="">
-        <ul className="flex space-x-2">
+        <ul className="flex items-center space-x-2">
           <li className="p-2">
             <Link to="/">Home</Link>
           </li>
@@ -26,8 +26,12 @@ const Header = () => {
           <li className="p-2">
             <Link to="/contact">Contact</Link>
           </li>
-          <li className="p-2 flex items-center">
-            Cart <div className="ml-1 px-2 py-1 rounded-full bg-green-500 text-white text-sm">{items?.length}</div>
+          <li className="p-2">
+            <Link to="/cart">
+              <div className="flex items-center">
+                Cart <div className="ml-1 px-2 py-1 rounded-full bg-green-500 text-white text-sm">{items?.length}</div>
+              </div>
+            </Link>
           </li>
         </ul>
       </div>

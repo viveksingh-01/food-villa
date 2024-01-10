@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
+import Cart from './components/Cart';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -44,6 +45,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/restaurant/:id',
         element: <Restaurant />
+      },
+      {
+        path: '/cart',
+        element: <Cart />
       },
       {
         path: '/instamart',
