@@ -27,15 +27,15 @@ function Cart() {
             <article key={id} className="w-100 p-2 px-3 mb-3 bg-gray-100 rounded-md flex justify-between items-center">
               <div className="flex flex-col">
                 <span className="text-gray">{name}</span>{' '}
-                <span className="font-semibold">Rs. {price / 100 || defaultPrice / 100}</span>
+                <span className="text-lg font-semibold">&#8377; {price / 100 || defaultPrice / 100}</span>
               </div>
             </article>
           );
         })}
       </section>
       <section className="flex justify-end">
-        <h3 className="text-lg">
-          Total: <span className="font-semibold text-2xl">Rs.{cartTotal}</span>
+        <h3 className="text-md">
+          Total: <span className="font-semibold text-2xl">&#8377;{cartTotal}</span>
         </h3>
       </section>
     </main>
