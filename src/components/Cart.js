@@ -24,7 +24,12 @@ function Cart() {
         price: price / 100
       });
     }
-    setCartItems(itemsList);
+    const uniqueItems = getUniqueItems(itemsList);
+    setCartItems(uniqueItems);
+  }
+
+  function getUniqueItems(itemsList) {
+    return Array.from(new Map(itemsList.map(item => [item.id, item])).values());
   }
 
   const calculateCartTotal = () => {
