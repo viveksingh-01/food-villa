@@ -25,11 +25,24 @@ function Cart() {
       });
     }
     const uniqueItems = getUniqueItems(itemsList);
+    for (const item of uniqueItems) {
+      item.count = getItemsCount(itemsList, item.id);
+    }
     setCartItems(uniqueItems);
   }
 
   function getUniqueItems(itemsList) {
     return Array.from(new Map(itemsList.map(item => [item.id, item])).values());
+  }
+
+  function getItemsCount(itemsList, id) {
+    let count = 0;
+    for (const item of itemsList) {
+      if (item.id == id) {
+        count++;
+      }
+    }
+    return count;
   }
 
   const calculateCartTotal = () => {
