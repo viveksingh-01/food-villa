@@ -59,11 +59,18 @@ function Cart() {
       <h1 className="text-3xl">Cart</h1>
       <section className="my-5">
         {cartItems.map(item => {
-          const { id, name, price } = item;
+          const { id, name, price, count } = item;
           return (
-            <article key={id} className="w-100 p-2 px-3 mb-3 bg-gray-100 rounded-md flex justify-between items-center">
+            <article
+              key={id}
+              className="w-100 p-2 px-3 mb-3 bg-gray-100 rounded-md flex justify-between items-center shadow-sm">
               <div className="flex flex-col">
                 <span className="text-gray">{name}</span> <span className="text-lg font-semibold">&#8377; {price}</span>
+              </div>
+              <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
+                <span className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl">-</span>
+                <span className="p-1">{count}</span>
+                <span className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl">+</span>
               </div>
             </article>
           );
