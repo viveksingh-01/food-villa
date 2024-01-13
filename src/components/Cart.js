@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../utils/cartSlice';
+import { addItem, removeItem } from '../utils/cartSlice';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -60,6 +60,10 @@ function Cart() {
     dispatch(addItem(item));
   }
 
+  function decrementItemCount(id) {
+    dispatch(removeItem(id));
+  }
+
   if (items.length === 0) return null;
   return (
     <main className="w-[560px] m-4 mx-auto p-2">
@@ -76,7 +80,11 @@ function Cart() {
                 <span className="text-lg font-semibold">&#8377; {price}</span>
               </div>
               <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
-                <span className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl">-</span>
+                <span
+                  className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl"
+                  onClick={() => decrementItemCount(item.id)}>
+                  -
+                </span>
                 <span className="p-1">{count}</span>
                 <span
                   className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl"
