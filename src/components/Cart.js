@@ -12,18 +12,18 @@ function Cart() {
   useEffect(() => {
     populateCartItemsList();
   }, [items]);
+
   useEffect(() => {
     calculateCartTotal();
   }, [cartItems]);
 
   function populateCartItemsList() {
     const itemsList = [];
-    for (const item of items) {
-      const { id, name, price } = item?.card?.info;
+    for (const { id, name, price } of items) {
       itemsList.push({
         id,
         name,
-        price: price / 100
+        price
       });
     }
     const uniqueItems = getUniqueItems(itemsList);
@@ -55,13 +55,12 @@ function Cart() {
     setCartTotal(total);
   };
 
-  function incrementItemCount(id) {
-    const item = items.find(e => e?.card?.info.id == id);
+  function incrementItemCount(item) {
     dispatch(addItem(item));
   }
 
-  function decrementItemCount(id) {
-    dispatch(removeItem(id));
+  function decrementItemCount(item) {
+    dispatch(removeItem(item.id));
   }
 
   if (items.length === 0) return null;
@@ -82,13 +81,13 @@ function Cart() {
               <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
                 <span
                   className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl"
-                  onClick={() => decrementItemCount(item.id)}>
+                  onClick={() => decrementItemCount(item)}>
                   -
                 </span>
                 <span className="p-1">{count}</span>
                 <span
                   className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl"
-                  onClick={() => incrementItemCount(item.id)}>
+                  onClick={() => incrementItemCount(item)}>
                   +
                 </span>
               </div>

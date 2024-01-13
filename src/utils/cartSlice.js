@@ -10,7 +10,7 @@ const { reducer, actions } = createSlice({
       state.items.push(action.payload);
     },
     removeItem: (state, action) => {
-      const itemIndex = state.items.findIndex(e => e?.card?.info.id === action.payload);
+      const itemIndex = state.items.findIndex(item => item.id === action.payload);
       state.items.splice(itemIndex, 1);
     }
   }
