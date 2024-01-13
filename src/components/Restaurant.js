@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { IMG_CDN_URL } from '../constants';
 import { addItem } from '../utils/cartSlice';
 import useRestaurantInfo from '../utils/hooks/useRestaurantInfo';
 
@@ -34,21 +35,22 @@ export default function Restaurant() {
             <p>Sorry, the menu is not available at the moment.</p>
           ) : (
             itemCards.map(item => (
-              <li
-                key={item.card.info.id}
-                className="w-[360px] p-2 px-3 mb-1 mr-8 bg-gray-100 rounded-md flex justify-between items-center">
-                <div className="flex flex-col">
-                  <span className="text-gray">{item.card.info.name}</span>{' '}
-                  <span className="font-semibold">
-                    Rs. {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-                  </span>
-                </div>
-                <div>
-                  <button
-                    className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200"
-                    onClick={() => handleAddItem(item)}>
-                    ADD
-                  </button>
+              <li key={item.card.info.id} className="w-[560px] mb-8 mr-8 bg-gray-100 rounded-md flex items-center">
+                <img src={IMG_CDN_URL + item.card.info.imageId} className="w-[240px] h-100 rounded-l-md" />
+                <div className="m-3 ml-5">
+                  <div className="flex flex-col mb-3">
+                    <span className="text-lg text-gray">{item.card.info.name}</span>{' '}
+                    <span className="font-semibold">
+                      Rs. {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
+                    </span>
+                  </div>
+                  <div>
+                    <button
+                      className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200"
+                      onClick={() => handleAddItem(item)}>
+                      ADD
+                    </button>
+                  </div>
                 </div>
               </li>
             ))
