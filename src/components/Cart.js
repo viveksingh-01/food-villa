@@ -29,6 +29,7 @@ function Cart() {
     const uniqueItems = getUniqueItems(itemsList);
     for (const item of uniqueItems) {
       item.count = getItemsCount(itemsList, item.id);
+      item.price = item.price * item.count;
     }
     setCartItems(uniqueItems);
   }
