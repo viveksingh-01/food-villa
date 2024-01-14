@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { IMG_CDN_URL } from '../constants';
 import { addItem } from '../utils/cartSlice';
@@ -8,6 +8,7 @@ import useRestaurantInfo from '../utils/hooks/useRestaurantInfo';
 export default function Restaurant() {
   const [menuItems, setMenuItems] = useState([]);
   const dispatch = useDispatch();
+  const cartItems = useSelector(store => store.cart.items);
 
   const { id } = useParams();
   const restaurantInfo = useRestaurantInfo(id);
@@ -28,10 +29,15 @@ export default function Restaurant() {
         id,
         imageId,
         name,
-        price: (price || defaultPrice) / 100
+        price: (price || defaultPrice) / 100,
+        count: getItemCount(id)
       });
     }
     setMenuItems(itemsList);
+  }
+
+  function getItemCount(id) {
+    return cartItems.filter(item => item.id == id).length;
   }
 
   function handleAddItem(item) {
