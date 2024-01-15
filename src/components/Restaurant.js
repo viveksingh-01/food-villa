@@ -19,6 +19,12 @@ export default function Restaurant() {
     }
   }, [restaurantInfo]);
 
+  useEffect(() => {
+    if (menuItems.length > 0) {
+      updateItemCount();
+    }
+  }, [cartItems]);
+
   if (!restaurantInfo) return null;
 
   function populateMenuItemsList() {
@@ -34,6 +40,15 @@ export default function Restaurant() {
       });
     }
     setMenuItems(itemsList);
+  }
+
+  function updateItemCount() {
+    const updatedItemsList = [];
+    for (const item of menuItems) {
+      const updatedItem = { ...item, count: getItemCount(item.id) };
+      updatedItemsList.push(updatedItem);
+    }
+    setMenuItems(updatedItemsList);
   }
 
   function getItemCount(id) {
