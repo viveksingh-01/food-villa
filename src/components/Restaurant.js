@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { IMG_CDN_URL } from '../constants';
-import { addItem } from '../utils/cartSlice';
+import { addItem, removeItem } from '../utils/cartSlice';
 import useRestaurantInfo from '../utils/hooks/useRestaurantInfo';
 
 export default function Restaurant() {
@@ -40,8 +40,12 @@ export default function Restaurant() {
     return cartItems.filter(item => item.id == id).length;
   }
 
-  function handleAddItem(item) {
+  function addItemToCart(item) {
     dispatch(addItem(item));
+  }
+
+  function removeItemFromCart(id) {
+    dispatch(removeItem(id));
   }
 
   return (
@@ -64,13 +68,30 @@ export default function Restaurant() {
                     <span className="text-lg text-gray">{item.name}</span>{' '}
                     <span className="font-semibold">Rs. {item.price}</span>
                   </div>
-                  <div>
-                    <button
-                      className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200"
-                      onClick={() => handleAddItem(item)}>
-                      ADD
-                    </button>
-                  </div>
+                  {item.count == 0 && (
+                    <div>
+                      <button
+                        className="p-2 px-4 text-sm font-semibold border-2 rounded-md bg-white text-green-500 hover:shadow-md hover:shadow-neutral-200"
+                        onClick={() => addItemToCart(item)}>
+                        ADD
+                      </button>
+                    </div>
+                  )}
+                  {item.count > 0 && (
+                    <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
+                      <span
+                        className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl"
+                        onClick={() => removeItemFromCart(item.id)}>
+                        -
+                      </span>
+                      <span className="p-1">{item.count}</span>
+                      <span
+                        className="p-1 -mt-1 text-xl hover:cursor-pointer hover:text-2xl"
+                        onClick={() => addItemToCart(item)}>
+                        +
+                      </span>
+                    </div>
+                  )}
                 </div>
               </li>
             ))
