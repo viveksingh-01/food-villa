@@ -23,13 +23,14 @@ function Cart() {
       itemsList.push({
         id,
         name,
-        price
+        price,
+        totalPrice: price
       });
     }
     const uniqueItems = getUniqueItems(itemsList);
     for (const item of uniqueItems) {
       item.count = getItemsCount(itemsList, item.id);
-      item.price = item.price * item.count;
+      item.totalPrice = item.price * item.count;
     }
     setCartItems(uniqueItems);
   }
@@ -51,7 +52,7 @@ function Cart() {
   const calculateCartTotal = () => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.price;
+      total += item.totalPrice;
     }
     setCartTotal(total);
   };
@@ -70,14 +71,14 @@ function Cart() {
       <h1 className="text-3xl">Cart</h1>
       <section className="my-5">
         {cartItems.map(item => {
-          const { id, name, price, count } = item;
+          const { id, name, totalPrice, count } = item;
           return (
             <article
               key={id}
               className="w-100 p-2 px-3 mb-3 bg-gray-100 rounded-md flex justify-between items-center shadow-sm">
               <div className="flex flex-col">
                 <span className="text-gray">{name}</span>
-                <span className="text-lg font-semibold">&#8377; {price}</span>
+                <span className="text-lg font-semibold">&#8377; {totalPrice}</span>
               </div>
               <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
                 <span
